@@ -13,29 +13,6 @@ st.write(car_data.head())
 # Título de la aplicación
 st.header('Análisis de Datos de Vehículos')
 
-# Botón para el histograma
-hist_button = st.button('Construir histograma')
-
-if hist_button:
-    st.write('Creando un histograma para el conjunto de datos de anuncios de venta de coches')
-    
-    # Crear el histograma
-    fig = px.histogram(car_data, x="odometer", nbins=50)
-
-     # Mostrar el gráfico (ESTA LÍNEA FALTA)
-    st.plotly_chart(fig, use_container_width=True)
-
-    # Botón para el gráfico de dispersión
-scatter_button = st.button('Construir gráfico de dispersión')
-
-if scatter_button:
-    st.write('Creando un gráfico de dispersión para el conjunto de datos de anuncios de venta de coches')
-    
-    # Crear el gráfico de dispersión
-    fig = px.scatter(car_data, x="odometer", y="price")
-    
-    # Mostrar el gráfico
-    st.plotly_chart(fig, use_container_width=True)
 
 # Agregar un slider para filtrar por año
 year_range = st.slider(
@@ -67,3 +44,27 @@ filtered_data = car_data[
     (car_data['price'] >= price_range[0]) & 
     (car_data['price'] <= price_range[1])
 ]
+
+# Botón para el histograma
+hist_button = st.button('Construir histograma')
+
+if hist_button:
+    st.write('Creando un histograma para el conjunto de datos de anuncios de venta de coches')
+    
+    # Crear el histograma
+    fig = px.histogram(filtered_data, x="odometer", nbins=50)
+
+     # Mostrar el gráfico (ESTA LÍNEA FALTA)
+    st.plotly_chart(fig, use_container_width=True)
+
+    # Botón para el gráfico de dispersión
+scatter_button = st.button('Construir gráfico de dispersión')
+
+if scatter_button:
+    st.write('Creando un gráfico de dispersión para el conjunto de datos de anuncios de venta de coches')
+    
+    # Crear el gráfico de dispersión
+    fig = px.scatter(filtered_data, x="odometer", y="price")
+    
+    # Mostrar el gráfico
+    st.plotly_chart(fig, use_container_width=True)
