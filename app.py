@@ -2,9 +2,33 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+# Configuración de la página
+st.set_page_config(
+    page_title="Análisis de Vehículos",
+    page_icon="🚗",
+    layout="wide"
+)
+
 # Cargar los datos
 car_data = pd.read_csv('vehicles_us.csv')
 
+
+# Título principal y descripción
+st.title('🚗 Análisis de Datos de Vehículos')
+st.markdown("""
+Esta aplicación te permite explorar y analizar datos de vehículos usados.
+Puedes filtrar por año y precio, y crear diferentes tipos de gráficos para entender mejor los datos.
+""")
+
+# Mostrar información básica de los datos
+st.subheader('📊 Información del Dataset')
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.metric("Total de vehículos", len(car_data))
+with col2:
+    st.metric("Año más antiguo", int(car_data['model_year'].min()))
+with col3:
+    st.metric("Año más reciente", int(car_data['model_year'].max()))
 # Verificar que los datos se cargaron
 st.write(f"Datos cargados: {len(car_data)} filas")
 st.write("Primeras 5 filas:")
